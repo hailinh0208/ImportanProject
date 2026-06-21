@@ -1,0 +1,9 @@
+apiDir: "../cms-notification-api/src/main/java"
+apiPackagePath: "cms.notification"
+application:
+    baseURI: "/headless-api"
+    className: "CmsNotificationApplication"
+    name: "CmsNotification"
+author: "ADMIN"
+clientDir: "../cms-notification-client/src/main/java"
+#testDir: "../cms-notification-test/src/testIntegration/java"

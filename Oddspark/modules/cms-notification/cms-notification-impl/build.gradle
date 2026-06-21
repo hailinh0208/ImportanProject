@@ -1,0 +1,11 @@
+dependencies {
+	api project(":modules:cms-notification:cms-notification-api")
+
+	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
+}
+
+group = "cms.notification"
+
+tasks.withType(JavaCompile) {
+	options.encoding = "UTF-8"
+}

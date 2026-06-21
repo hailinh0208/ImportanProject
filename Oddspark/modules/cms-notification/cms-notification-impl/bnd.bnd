@@ -1,0 +1,3 @@
+Bundle-Name: cms-notification-impl
+Bundle-SymbolicName: cms.notification.impl
+Bundle-Version: 1.0.0

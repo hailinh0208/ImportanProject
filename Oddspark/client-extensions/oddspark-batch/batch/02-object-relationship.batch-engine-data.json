@@ -1,0 +1,26 @@
+{
+  "configuration": {
+    "className": "com.liferay.object.admin.rest.dto.v1_0.ObjectRelationship",
+    "parameters": {
+      "containsHeaders": "true",
+      "createStrategy": "UPSERT",
+      "onErrorFail": "false",
+      "taskItemDelegateName": "DEFAULT",
+      "updateStrategy": "UPDATE"
+    }
+  },
+  "items": [
+    {
+      "externalReferenceCode": "OP_REL_NOTICE_MASTER_PRIORITY",
+      "name": "importantNoticePriority",
+      "label": {
+        "en_US": "Notice Master ID",
+        "ja_JP": "お知らせID"
+      },
+      "objectDefinitionExternalReferenceCode1": "OP_OBJ_NOTICE_MASTER",
+      "objectDefinitionExternalReferenceCode2": "OP_OBJ_IMPORTANT_NOTICE_PRIORITY",
+      "type": "oneToMany",
+      "deletionType": "cascade"
+    }
+  ]
+}

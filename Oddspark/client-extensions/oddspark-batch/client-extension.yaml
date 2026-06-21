@@ -1,0 +1,26 @@
+oddspark-batch:
+  name: Oddspark Batch Data
+  oAuthApplicationHeadlessServer: oddspark-batch-oahs
+  type: batch
+  allowedConfigurations:
+    - com.liferay.headless.admin.list.type.dto.v1_0.ListTypeDefinition
+    - com.liferay.object.admin.rest.dto.v1_0.ObjectDefinition
+    - com.liferay.object.admin.rest.dto.v1_0.ObjectFolder
+    - com.liferay.object.admin.rest.dto.v1_0.ObjectRelationship
+  fileNames:
+    - batch/00-object-folder.batch-engine-data.json
+    - batch/00-list-type-definition.batch-engine-data.json
+    - batch/01-object-definition.batch-engine-data.json
+    - batch/02-object-relationship.batch-engine-data.json
+
+oddspark-batch-oahs:
+  .serviceAddress: localhost:8080
+  .serviceScheme: http
+  name: Oddspark Batch OAuth Application Headless Server
+  scopes:
+    - C_NoticeMaster.everything
+    - C_ImportantNoticePriority.everything
+    - Liferay.Headless.Admin.List.Type.everything
+    - Liferay.Headless.Batch.Engine.everything
+    - Liferay.Object.Admin.REST.everything
+  type: oAuthApplicationHeadlessServer

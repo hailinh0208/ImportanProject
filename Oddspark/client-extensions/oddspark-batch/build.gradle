@@ -1,0 +1,6 @@
+task copyBatchFiles(type: Copy) {
+	from 'batch'
+	into "${buildDir}/liferay-client-extension-build/batch"
+}
+
+buildClientExtensionZip.dependsOn copyBatchFiles

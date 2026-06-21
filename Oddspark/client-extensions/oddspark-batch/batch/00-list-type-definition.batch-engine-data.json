@@ -1,0 +1,405 @@
+{
+  "configuration": {
+    "className": "com.liferay.headless.admin.list.type.dto.v1_0.ListTypeDefinition",
+    "parameters": {
+      "containsHeaders": "true",
+      "createStrategy": "UPSERT",
+      "onErrorFail": "false",
+      "taskItemDelegateName": "DEFAULT",
+      "updateStrategy": "UPDATE"
+    }
+  },
+  "items": [
+    {
+      "externalReferenceCode": "OP_LIST_COMPETITION_TYPE",
+      "name": "CompetitionType",
+      "name_i18n": {
+        "en_US": "Competition Type",
+        "ja_JP": "競技区分"
+      },
+      "listTypeEntries": [
+        {
+          "externalReferenceCode": "OP_LIST_COMPETITION_TYPE_KEIBA",
+          "key": "keiba",
+          "name": "Keiba",
+          "name_i18n": {
+            "en_US": "Horse Racing",
+            "ja_JP": "競馬"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_COMPETITION_TYPE_CYCLE",
+          "key": "cycle",
+          "name": "Cycle",
+          "name_i18n": {
+            "en_US": "Bicycle Racing",
+            "ja_JP": "競輪"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_COMPETITION_TYPE_AUTORACE",
+          "key": "autorace",
+          "name": "Autorace",
+          "name_i18n": {
+            "en_US": "Autorace",
+            "ja_JP": "オートレース"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_COMPETITION_TYPE_LOTO",
+          "key": "loto",
+          "name": "LOTO",
+          "name_i18n": {
+            "en_US": "LOTO",
+            "ja_JP": "LOTO"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_COMPETITION_TYPE_GENERAL",
+          "key": "general",
+          "name": "General",
+          "name_i18n": {
+            "en_US": "General",
+            "ja_JP": "総合"
+          }
+        }
+      ]
+    },
+    {
+      "externalReferenceCode": "OP_LIST_DISPLAY_BEFORE_AFTER_LOGIN",
+      "name": "DisplayBeforeOrAfterLogin",
+      "name_i18n": {
+        "en_US": "Display Setting (Before/After Login)",
+        "ja_JP": "ログイン前後の表示設定"
+      },
+      "listTypeEntries": [
+        {
+          "externalReferenceCode": "OP_LIST_DISPLAY_BEFORE_AFTER_LOGIN_BEFORE",
+          "key": "before",
+          "name": "Before Login",
+          "name_i18n": {
+            "en_US": "Before Login",
+            "ja_JP": "ログイン前"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_DISPLAY_BEFORE_AFTER_LOGIN_AFTER",
+          "key": "after",
+          "name": "After Login",
+          "name_i18n": {
+            "en_US": "After Login",
+            "ja_JP": "ログイン後"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_DISPLAY_BEFORE_AFTER_LOGIN_BOTH",
+          "key": "both",
+          "name": "Before/After Login",
+          "name_i18n": {
+            "en_US": "Before and After Login",
+            "ja_JP": "ログイン前後"
+          }
+        }
+      ]
+    },
+    {
+      "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE",
+      "name": "ImportantNoticeDisplayPage",
+      "name_i18n": {
+        "en_US": "Important Notice Display Page",
+        "ja_JP": "重要なお知らせ表示画面"
+      },
+      "listTypeEntries": [
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_1",
+          "key": "1",
+          "name": "Overall TOP Screen",
+          "name_i18n": {
+            "en_US": "Overall TOP Screen",
+            "ja_JP": "総合TOP画面"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_2",
+          "key": "2",
+          "name": "App",
+          "name_i18n": {
+            "en_US": "App",
+            "ja_JP": "アプリ"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_3",
+          "key": "3",
+          "name": "Horse Racing TOP Screen",
+          "name_i18n": {
+            "en_US": "Horse Racing TOP Screen",
+            "ja_JP": "競馬TOP画面"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_4",
+          "key": "4",
+          "name": "Horse Racing Race List",
+          "name_i18n": {
+            "en_US": "Horse Racing Race List",
+            "ja_JP": "競馬レース一覧"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_5",
+          "key": "5",
+          "name": "Horse Racing Race Information",
+          "name_i18n": {
+            "en_US": "Horse Racing Race Information",
+            "ja_JP": "競馬レース情報"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_6",
+          "key": "6",
+          "name": "Horse Racing Prediction Information",
+          "name_i18n": {
+            "en_US": "Horse Racing Prediction Information",
+            "ja_JP": "競馬予想情報"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_7",
+          "key": "7",
+          "name": "Horse Racing Odds List",
+          "name_i18n": {
+            "en_US": "Horse Racing Odds List",
+            "ja_JP": "競馬オッズ一覧"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_8",
+          "key": "8",
+          "name": "Horse Racing Race Footage",
+          "name_i18n": {
+            "en_US": "Horse Racing Race Footage",
+            "ja_JP": "競馬レース映像"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_9",
+          "key": "9",
+          "name": "Horse Racing Payment Results List",
+          "name_i18n": {
+            "en_US": "Horse Racing Payment Results List",
+            "ja_JP": "競馬支払い結果一覧"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_10",
+          "key": "10",
+          "name": "Keirin TOP Screen",
+          "name_i18n": {
+            "en_US": "Keirin TOP Screen",
+            "ja_JP": "競輪TOP画面"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_11",
+          "key": "11",
+          "name": "Keirin Race List",
+          "name_i18n": {
+            "en_US": "Keirin Race List",
+            "ja_JP": "競輪レース一覧"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_12",
+          "key": "12",
+          "name": "Keirin Race Information",
+          "name_i18n": {
+            "en_US": "Keirin Race Information",
+            "ja_JP": "競輪レース情報"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_13",
+          "key": "13",
+          "name": "Keirin Prediction Information",
+          "name_i18n": {
+            "en_US": "Keirin Prediction Information",
+            "ja_JP": "競輪予想情報"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_14",
+          "key": "14",
+          "name": "Keirin Odds List",
+          "name_i18n": {
+            "en_US": "Keirin Odds List",
+            "ja_JP": "競輪オッズ一覧"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_15",
+          "key": "15",
+          "name": "Keirin Race Footage",
+          "name_i18n": {
+            "en_US": "Keirin Race Footage",
+            "ja_JP": "競輪レース映像"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_16",
+          "key": "16",
+          "name": "Keirin Payment Results List",
+          "name_i18n": {
+            "en_US": "Keirin Payment Results List",
+            "ja_JP": "競輪支払い結果一覧"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_17",
+          "key": "17",
+          "name": "Auto Race TOP Screen",
+          "name_i18n": {
+            "en_US": "Auto Race TOP Screen",
+            "ja_JP": "オートレースTOP画面"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_18",
+          "key": "18",
+          "name": "Auto Race Race List",
+          "name_i18n": {
+            "en_US": "Auto Race Race List",
+            "ja_JP": "オートレースレース一覧"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_19",
+          "key": "19",
+          "name": "Auto Race Race Information",
+          "name_i18n": {
+            "en_US": "Auto Race Race Information",
+            "ja_JP": "オートレースレース情報"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_20",
+          "key": "20",
+          "name": "Auto Race Predictions",
+          "name_i18n": {
+            "en_US": "Auto Race Predictions",
+            "ja_JP": "オートレース予想情報"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_21",
+          "key": "21",
+          "name": "Auto Race Odds List",
+          "name_i18n": {
+            "en_US": "Auto Race Odds List",
+            "ja_JP": "オートレースオッズ一覧"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_22",
+          "key": "22",
+          "name": "Auto Race Race Video",
+          "name_i18n": {
+            "en_US": "Auto Race Race Video",
+            "ja_JP": "オートレースレース映像"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_23",
+          "key": "23",
+          "name": "Auto Race Payment Results List",
+          "name_i18n": {
+            "en_US": "Auto Race Payment Results List",
+            "ja_JP": "オートレース支払い結果一覧"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_24",
+          "key": "24",
+          "name": "LOTO TOP screen",
+          "name_i18n": {
+            "en_US": "LOTO TOP screen",
+            "ja_JP": "LOTO TOP画面"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_25",
+          "key": "25",
+          "name": "LOTO Race List",
+          "name_i18n": {
+            "en_US": "LOTO Race List",
+            "ja_JP": "LOTOレース一覧"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_26",
+          "key": "26",
+          "name": "LOTO Race Information",
+          "name_i18n": {
+            "en_US": "LOTO Race Information",
+            "ja_JP": "LOTOレース情報"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_27",
+          "key": "27",
+          "name": "LOTO Prediction Information",
+          "name_i18n": {
+            "en_US": "LOTO Prediction Information",
+            "ja_JP": "LOTO予想情報"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE_28",
+          "key": "28",
+          "name": "LOTO Progress and Results",
+          "name_i18n": {
+            "en_US": "LOTO Progress and Results",
+            "ja_JP": "LOTO経過・結果"
+          }
+        }
+      ]
+    },
+    {
+      "externalReferenceCode": "OP_LIST_NOTICE_CATEGORIES",
+      "name": "NoticeCategories",
+      "name_i18n": {
+        "en_US": "Notice Categories",
+        "ja_JP": "カテゴリ"
+      },
+      "listTypeEntries": [
+        {
+          "externalReferenceCode": "OP_LIST_NOTICE_CATEGORIES_EVENT",
+          "key": "event",
+          "name": "Event",
+          "name_i18n": {
+            "en_US": "Event Information",
+            "ja_JP": "開催情報"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_NOTICE_CATEGORIES_SERVICE",
+          "key": "service",
+          "name": "Service",
+          "name_i18n": {
+            "en_US": "Service",
+            "ja_JP": "サービス"
+          }
+        },
+        {
+          "externalReferenceCode": "OP_LIST_NOTICE_CATEGORIES_OTHER",
+          "key": "other",
+          "name": "Other",
+          "name_i18n": {
+            "en_US": "Other",
+            "ja_JP": "その他"
+          }
+        }
+      ]
+    }
+  ]
+}

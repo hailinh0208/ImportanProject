@@ -1,0 +1,277 @@
+{
+  "configuration": {
+    "className": "com.liferay.object.admin.rest.dto.v1_0.ObjectDefinition",
+    "parameters": {
+      "containsHeaders": "true",
+      "createStrategy": "UPSERT",
+      "onErrorFail": "false",
+      "taskItemDelegateName": "DEFAULT",
+      "updateStrategy": "UPDATE"
+    }
+  },
+  "items": [
+    {
+      "accountEntryRestricted": false,
+      "active": true,
+      "enableCategorization": true,
+      "enableComments": true,
+      "enableFriendlyURLCustomization": true,
+      "enableIndexSearch": true,
+      "enableLocalization": true,
+      "enableObjectEntryDraft": true,
+      "enableObjectEntryHistory": true,
+      "externalReferenceCode": "OP_OBJ_NOTICE_MASTER",
+      "label": {
+        "en_US": "Notice Master",
+        "ja_JP": "お知らせ管理"
+      },
+      "pluralLabel": {
+        "en_US": "Notice Masters",
+        "ja_JP": "お知らせ管理"
+      },
+      "name": "NoticeMaster",
+      "defaultLanguageId": "ja_JP",
+      "portlet": true,
+      "scope": "company",
+      "panelCategoryKey": "control_panel.object",
+      "objectFolderExternalReferenceCode": "OP_OBJF_NOTICE",
+      "objectFields": [
+        {
+          "DBType": "String",
+          "businessType": "MultiselectPicklist",
+          "externalReferenceCode": "OP_OBJ_NOTICE_MASTER_CATEGORIES",
+          "indexed": true,
+          "indexedAsKeyword": true,
+          "label": {
+            "en_US": "Category",
+            "ja_JP": "カテゴリ"
+          },
+          "listTypeDefinitionExternalReferenceCode": "OP_LIST_NOTICE_CATEGORIES",
+          "name": "categories",
+          "required": true
+        },
+        {
+          "DBType": "String",
+          "businessType": "MultiselectPicklist",
+          "externalReferenceCode": "OP_OBJ_NOTICE_MASTER_COMPETITIONS",
+          "indexed": true,
+          "indexedAsKeyword": true,
+          "label": {
+            "en_US": "Regular Notice Settings",
+            "ja_JP": "通常お知らせの設定"
+          },
+          "listTypeDefinitionExternalReferenceCode": "OP_LIST_COMPETITION_TYPE",
+          "name": "competitions",
+          "required": true
+        },
+        {
+          "DBType": "Boolean",
+          "businessType": "Boolean",
+          "externalReferenceCode": "OP_OBJ_NOTICE_MASTER_PUBLISH_STATUS",
+          "indexed": true,
+          "indexedAsKeyword": true,
+          "label": {
+            "en_US": "Publish Status",
+            "ja_JP": "公開ステータス"
+          },
+          "name": "publishStatus",
+          "required": false
+        },
+        {
+          "DBType": "String",
+          "businessType": "Text",
+          "externalReferenceCode": "OP_OBJ_NOTICE_MASTER_CURRENT_VERSION",
+          "indexed": false,
+          "label": {
+            "en_US": "Current Version",
+            "ja_JP": "現在バージョン"
+          },
+          "name": "currentVersion",
+          "required": true
+        },
+        {
+          "DBType": "String",
+          "businessType": "Text",
+          "externalReferenceCode": "OP_OBJ_NOTICE_MASTER_LIVE_VERSION",
+          "indexed": false,
+          "label": {
+            "en_US": "Live Version",
+            "ja_JP": "公開バージョン"
+          },
+          "name": "liveVersion",
+          "required": false
+        },
+        {
+          "DBType": "String",
+          "businessType": "Text",
+          "externalReferenceCode": "OP_OBJ_NOTICE_MASTER_NOTICE_TITLE",
+          "indexed": true,
+          "indexedAsKeyword": false,
+          "label": {
+            "en_US": "Title",
+            "ja_JP": "タイトル"
+          },
+          "name": "noticeTitle",
+          "required": true
+        },
+        {
+          "DBType": "String",
+          "businessType": "Text",
+          "externalReferenceCode": "OP_OBJ_NOTICE_MASTER_NOTICE_CONTENT",
+          "indexed": false,
+          "label": {
+            "en_US": "Content",
+            "ja_JP": "本文"
+          },
+          "name": "noticeContent",
+          "required": false
+        },
+        {
+          "DBType": "Boolean",
+          "businessType": "Boolean",
+          "externalReferenceCode": "OP_OBJ_NOTICE_MASTER_IMPORTANT_NOTICE",
+          "indexed": true,
+          "indexedAsKeyword": true,
+          "label": {
+            "en_US": "Important Notice",
+            "ja_JP": "重要なお知らせ"
+          },
+          "name": "importantNotice",
+          "required": true
+        },
+        {
+          "DBType": "Date",
+          "businessType": "Date",
+          "externalReferenceCode": "OP_OBJ_NOTICE_MASTER_IMPORTANT_NOTICE_START",
+          "indexed": true,
+          "indexedAsKeyword": true,
+          "label": {
+            "en_US": "Important Notice Start",
+            "ja_JP": "公開開始日時"
+          },
+          "name": "importantNoticeStart",
+          "required": false
+        },
+        {
+          "DBType": "Date",
+          "businessType": "Date",
+          "externalReferenceCode": "OP_OBJ_NOTICE_MASTER_IMPORTANT_NOTICE_END",
+          "indexed": true,
+          "indexedAsKeyword": true,
+          "label": {
+            "en_US": "Important Notice End",
+            "ja_JP": "非公開日時"
+          },
+          "name": "importantNoticeEnd",
+          "required": false
+        },
+        {
+          "DBType": "String",
+          "businessType": "MultiselectPicklist",
+          "externalReferenceCode": "OP_OBJ_NOTICE_MASTER_DISPLAY_PAGE_MULTI",
+          "indexed": true,
+          "indexedAsKeyword": true,
+          "label": {
+            "en_US": "Display Screen",
+            "ja_JP": "表示画面"
+          },
+          "listTypeDefinitionExternalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE",
+          "name": "displayPageMulti",
+          "required": false
+        },
+        {
+          "DBType": "String",
+          "businessType": "Picklist",
+          "externalReferenceCode": "OP_OBJ_NOTICE_MASTER_DISPLAY_BEFORE_OR_AFTER_LOGIN",
+          "indexed": true,
+          "indexedAsKeyword": true,
+          "label": {
+            "en_US": "Display Before/After Login",
+            "ja_JP": "ログイン前後の表示設定"
+          },
+          "listTypeDefinitionExternalReferenceCode": "OP_LIST_DISPLAY_BEFORE_AFTER_LOGIN",
+          "name": "displayBeforeOrAfterLogin",
+          "required": false
+        },
+        {
+          "DBType": "String",
+          "businessType": "Text",
+          "externalReferenceCode": "OP_OBJ_NOTICE_MASTER_EDITOR",
+          "indexed": false,
+          "label": {
+            "en_US": "Editor",
+            "ja_JP": "最終編集者"
+          },
+          "name": "editor",
+          "required": false
+        }
+      ]
+    },
+    {
+      "accountEntryRestricted": false,
+      "active": true,
+      "enableCategorization": true,
+      "enableComments": true,
+      "enableFriendlyURLCustomization": true,
+      "enableIndexSearch": true,
+      "enableLocalization": true,
+      "enableObjectEntryDraft": true,
+      "enableObjectEntryHistory": true,
+      "externalReferenceCode": "OP_OBJ_IMPORTANT_NOTICE_PRIORITY",
+      "label": {
+        "en_US": "Important Notice Priority",
+        "ja_JP": "重要なお知らせの優先度"
+      },
+      "pluralLabel": {
+        "en_US": "Important Notice Priorities",
+        "ja_JP": "重要なお知らせの優先度"
+      },
+      "name": "ImportantNoticePriority",
+      "defaultLanguageId": "ja_JP",
+      "portlet": true,
+      "scope": "company",
+      "panelCategoryKey": "control_panel.object",
+      "objectFolderExternalReferenceCode": "OP_OBJF_NOTICE",
+      "objectFields": [
+        {
+          "DBType": "String",
+          "businessType": "Picklist",
+          "externalReferenceCode": "OP_OBJ_IMPORTANT_NOTICE_PRIORITY_DISPLAY_PAGE_SINGLE",
+          "indexed": true,
+          "indexedAsKeyword": true,
+          "label": {
+            "en_US": "Display Page",
+            "ja_JP": "表示画面"
+          },
+          "listTypeDefinitionExternalReferenceCode": "OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE",
+          "name": "displayPageSingle",
+          "required": true
+        },
+        {
+          "DBType": "Integer",
+          "businessType": "Integer",
+          "externalReferenceCode": "OP_OBJ_IMPORTANT_NOTICE_PRIORITY_PRIORITY",
+          "indexed": false,
+          "label": {
+            "en_US": "Priority",
+            "ja_JP": "優先度"
+          },
+          "name": "priority",
+          "required": false
+        },
+        {
+          "DBType": "String",
+          "businessType": "Text",
+          "externalReferenceCode": "OP_OBJ_IMPORTANT_NOTICE_PRIORITY_EDITOR",
+          "indexed": false,
+          "label": {
+            "en_US": "Editor",
+            "ja_JP": "最終編集者"
+          },
+          "name": "editor",
+          "required": false
+        }
+      ]
+    }
+  ]
+}

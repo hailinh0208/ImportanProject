@@ -1,0 +1,6 @@
+Bundle-Name: cms-notification-api
+Bundle-SymbolicName: cms.notification.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	cms.notification.dto.v1_0,\
+	cms.notification.resource.v1_0
