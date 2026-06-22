@@ -115,8 +115,8 @@
           "required": true
         },
         {
-          "DBType": "String",
-          "businessType": "Text",
+          "DBType": "Clob",
+          "businessType": "LongText",
           "externalReferenceCode": "OP_OBJ_NOTICE_MASTER_NOTICE_CONTENT",
           "indexed": false,
           "label": {
@@ -137,7 +137,7 @@
             "ja_JP": "重要なお知らせ"
           },
           "name": "importantNotice",
-          "required": true
+          "required": false
         },
         {
           "DBType": "Date",
