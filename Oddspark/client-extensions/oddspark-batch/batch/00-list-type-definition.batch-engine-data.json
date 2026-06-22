@@ -20,7 +20,7 @@
       "listTypeEntries": [
         {
           "externalReferenceCode": "OP_LIST_COMPETITION_TYPE_KEIBA",
-          "key": "keiba",
+          "key": "1",
           "name": "Keiba",
           "name_i18n": {
             "en_US": "Horse Racing",
@@ -29,7 +29,7 @@
         },
         {
           "externalReferenceCode": "OP_LIST_COMPETITION_TYPE_CYCLE",
-          "key": "cycle",
+          "key": "2",
           "name": "Cycle",
           "name_i18n": {
             "en_US": "Bicycle Racing",
@@ -38,7 +38,7 @@
         },
         {
           "externalReferenceCode": "OP_LIST_COMPETITION_TYPE_AUTORACE",
-          "key": "autorace",
+          "key": "3",
           "name": "Autorace",
           "name_i18n": {
             "en_US": "Autorace",
@@ -47,7 +47,7 @@
         },
         {
           "externalReferenceCode": "OP_LIST_COMPETITION_TYPE_LOTO",
-          "key": "loto",
+          "key": "4",
           "name": "LOTO",
           "name_i18n": {
             "en_US": "LOTO",
@@ -56,7 +56,7 @@
         },
         {
           "externalReferenceCode": "OP_LIST_COMPETITION_TYPE_GENERAL",
-          "key": "general",
+          "key": "5",
           "name": "General",
           "name_i18n": {
             "en_US": "General",
@@ -75,7 +75,7 @@
       "listTypeEntries": [
         {
           "externalReferenceCode": "OP_LIST_DISPLAY_BEFORE_AFTER_LOGIN_BEFORE",
-          "key": "before",
+          "key": "1",
           "name": "Before Login",
           "name_i18n": {
             "en_US": "Before Login",
@@ -84,7 +84,7 @@
         },
         {
           "externalReferenceCode": "OP_LIST_DISPLAY_BEFORE_AFTER_LOGIN_AFTER",
-          "key": "after",
+          "key": "2",
           "name": "After Login",
           "name_i18n": {
             "en_US": "After Login",
@@ -93,7 +93,7 @@
         },
         {
           "externalReferenceCode": "OP_LIST_DISPLAY_BEFORE_AFTER_LOGIN_BOTH",
-          "key": "both",
+          "key": "3",
           "name": "Before/After Login",
           "name_i18n": {
             "en_US": "Before and After Login",
@@ -374,7 +374,7 @@
       "listTypeEntries": [
         {
           "externalReferenceCode": "OP_LIST_NOTICE_CATEGORIES_EVENT",
-          "key": "event",
+          "key": "1",
           "name": "Event",
           "name_i18n": {
             "en_US": "Event Information",
@@ -383,7 +383,7 @@
         },
         {
           "externalReferenceCode": "OP_LIST_NOTICE_CATEGORIES_SERVICE",
-          "key": "service",
+          "key": "2",
           "name": "Service",
           "name_i18n": {
             "en_US": "Service",
@@ -392,7 +392,7 @@
         },
         {
           "externalReferenceCode": "OP_LIST_NOTICE_CATEGORIES_OTHER",
-          "key": "other",
+          "key": "3",
           "name": "Other",
           "name_i18n": {
             "en_US": "Other",

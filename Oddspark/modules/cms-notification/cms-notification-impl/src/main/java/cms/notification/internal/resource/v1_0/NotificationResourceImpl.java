@@ -72,7 +72,7 @@ public class NotificationResourceImpl extends BaseNotificationResourceImpl {
 
 		if (competitionEntryList.isEmpty() ||
 			competition < 1 ||
-			competition > competitionEntryList.size()) {
+			competition > 5) {
 
 			_throwBadRequest("MDBCME0014", "正しい競技タイプを入力してください。");
 		}
@@ -188,7 +188,7 @@ public class NotificationResourceImpl extends BaseNotificationResourceImpl {
 
 				Category cat = new Category();
 
-				cat.setKey(entry.getListTypeEntryId());
+				cat.setKey(Long.parseLong(entry.getKey()));
 				cat.setName(entry.getName(locale));
 
 				return cat;
