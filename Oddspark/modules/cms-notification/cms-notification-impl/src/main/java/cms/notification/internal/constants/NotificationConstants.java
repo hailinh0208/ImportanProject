@@ -34,6 +34,10 @@ public final class NotificationConstants {
 	public static final String ERROR_MISSING_COMPETITION = "MDBCME0001";
 	public static final String ERROR_INVALID_COMPETITION = "MDBCME0014";
 
+	// Error code for server-side failures (500 / 503)
+	public static final String ERROR_SERVER_ERROR = "MDBCME0012";
+	public static final String ERROR_SERVER_MESSAGE = "一時的にアクセスできない状態です。時間を置いて再度お試しください。";
+
 	private NotificationConstants() {
 	}
 }
