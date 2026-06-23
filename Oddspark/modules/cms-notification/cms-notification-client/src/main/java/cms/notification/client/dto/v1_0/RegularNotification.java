@@ -183,4 +183,4 @@ public class RegularNotification implements Cloneable, Serializable {
 	}
 
 }
-// LIFERAY-REST-BUILDER-HASH:-936808375
+// LIFERAY-REST-BUILDER-HASH:456808099

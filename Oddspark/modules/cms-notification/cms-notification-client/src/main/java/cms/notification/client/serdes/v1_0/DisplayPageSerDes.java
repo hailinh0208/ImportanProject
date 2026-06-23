@@ -5,7 +5,7 @@
 
 package cms.notification.client.serdes.v1_0;
 
-import cms.notification.client.dto.v1_0.MessageInfo;
+import cms.notification.client.dto.v1_0.DisplayPage;
 import cms.notification.client.json.BaseJSONParser;
 
 import jakarta.annotation.Generated;
@@ -21,24 +21,24 @@ import java.util.TreeMap;
  * @generated
  */
 @Generated("")
-public class MessageInfoSerDes {
+public class DisplayPageSerDes {
 
-	public static MessageInfo toDTO(String json) {
-		MessageInfoJSONParser messageInfoJSONParser =
-			new MessageInfoJSONParser();
+	public static DisplayPage toDTO(String json) {
+		DisplayPageJSONParser displayPageJSONParser =
+			new DisplayPageJSONParser();
 
-		return messageInfoJSONParser.parseToDTO(json);
+		return displayPageJSONParser.parseToDTO(json);
 	}
 
-	public static MessageInfo[] toDTOs(String json) {
-		MessageInfoJSONParser messageInfoJSONParser =
-			new MessageInfoJSONParser();
+	public static DisplayPage[] toDTOs(String json) {
+		DisplayPageJSONParser displayPageJSONParser =
+			new DisplayPageJSONParser();
 
-		return messageInfoJSONParser.parseToDTOs(json);
+		return displayPageJSONParser.parseToDTOs(json);
 	}
 
-	public static String toJSON(MessageInfo messageInfo) {
-		if (messageInfo == null) {
+	public static String toJSON(DisplayPage displayPage) {
+		if (displayPage == null) {
 			return "null";
 		}
 
@@ -46,30 +46,26 @@ public class MessageInfoSerDes {
 
 		sb.append("{");
 
-		if (messageInfo.getMessageBody() != null) {
+		if (displayPage.getKey() != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"messageBody\": ");
+			sb.append("\"key\": ");
 
-			sb.append("\"");
-
-			sb.append(_escape(messageInfo.getMessageBody()));
-
-			sb.append("\"");
+			sb.append(displayPage.getKey());
 		}
 
-		if (messageInfo.getMessageId() != null) {
+		if (displayPage.getName() != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"messageId\": ");
+			sb.append("\"name\": ");
 
 			sb.append("\"");
 
-			sb.append(_escape(messageInfo.getMessageId()));
+			sb.append(_escape(displayPage.getName()));
 
 			sb.append("\"");
 		}
@@ -80,56 +76,55 @@ public class MessageInfoSerDes {
 	}
 
 	public static Map<String, Object> toMap(String json) {
-		MessageInfoJSONParser messageInfoJSONParser =
-			new MessageInfoJSONParser();
+		DisplayPageJSONParser displayPageJSONParser =
+			new DisplayPageJSONParser();
 
-		return messageInfoJSONParser.parseToMap(json);
+		return displayPageJSONParser.parseToMap(json);
 	}
 
-	public static Map<String, String> toMap(MessageInfo messageInfo) {
-		if (messageInfo == null) {
+	public static Map<String, String> toMap(DisplayPage displayPage) {
+		if (displayPage == null) {
 			return null;
 		}
 
 		Map<String, String> map = new TreeMap<>();
 
-		if (messageInfo.getMessageBody() == null) {
-			map.put("messageBody", null);
+		if (displayPage.getKey() == null) {
+			map.put("key", null);
 		}
 		else {
-			map.put(
-				"messageBody", String.valueOf(messageInfo.getMessageBody()));
+			map.put("key", String.valueOf(displayPage.getKey()));
 		}
 
-		if (messageInfo.getMessageId() == null) {
-			map.put("messageId", null);
+		if (displayPage.getName() == null) {
+			map.put("name", null);
 		}
 		else {
-			map.put("messageId", String.valueOf(messageInfo.getMessageId()));
+			map.put("name", String.valueOf(displayPage.getName()));
 		}
 
 		return map;
 	}
 
-	public static class MessageInfoJSONParser
-		extends BaseJSONParser<MessageInfo> {
+	public static class DisplayPageJSONParser
+		extends BaseJSONParser<DisplayPage> {
 
 		@Override
-		protected MessageInfo createDTO() {
-			return new MessageInfo();
+		protected DisplayPage createDTO() {
+			return new DisplayPage();
 		}
 
 		@Override
-		protected MessageInfo[] createDTOArray(int size) {
-			return new MessageInfo[size];
+		protected DisplayPage[] createDTOArray(int size) {
+			return new DisplayPage[size];
 		}
 
 		@Override
 		protected boolean parseMaps(String jsonParserFieldName) {
-			if (Objects.equals(jsonParserFieldName, "messageBody")) {
+			if (Objects.equals(jsonParserFieldName, "key")) {
 				return false;
 			}
-			else if (Objects.equals(jsonParserFieldName, "messageId")) {
+			else if (Objects.equals(jsonParserFieldName, "name")) {
 				return false;
 			}
 
@@ -138,17 +133,18 @@ public class MessageInfoSerDes {
 
 		@Override
 		protected void setField(
-			MessageInfo messageInfo, String jsonParserFieldName,
+			DisplayPage displayPage, String jsonParserFieldName,
 			Object jsonParserFieldValue) {
 
-			if (Objects.equals(jsonParserFieldName, "messageBody")) {
+			if (Objects.equals(jsonParserFieldName, "key")) {
 				if (jsonParserFieldValue != null) {
-					messageInfo.setMessageBody((String)jsonParserFieldValue);
+					displayPage.setKey(
+						Integer.valueOf((String)jsonParserFieldValue));
 				}
 			}
-			else if (Objects.equals(jsonParserFieldName, "messageId")) {
+			else if (Objects.equals(jsonParserFieldName, "name")) {
 				if (jsonParserFieldValue != null) {
-					messageInfo.setMessageId((String)jsonParserFieldValue);
+					displayPage.setName((String)jsonParserFieldValue);
 				}
 			}
 		}
@@ -232,4 +228,4 @@ public class MessageInfoSerDes {
 	}
 
 }
-// LIFERAY-REST-BUILDER-HASH:-394548993
+// LIFERAY-REST-BUILDER-HASH:-639575376

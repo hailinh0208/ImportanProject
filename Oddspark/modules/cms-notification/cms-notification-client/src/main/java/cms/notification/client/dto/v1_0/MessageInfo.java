@@ -99,4 +99,4 @@ public class MessageInfo implements Cloneable, Serializable {
 	}
 
 }
-// LIFERAY-REST-BUILDER-HASH:1354037234
+// LIFERAY-REST-BUILDER-HASH:916757592

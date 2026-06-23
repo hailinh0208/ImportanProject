@@ -303,4 +303,4 @@ public class RegularNotificationResponseSerDes {
 	}
 
 }
-// LIFERAY-REST-BUILDER-HASH:1730457151
+// LIFERAY-REST-BUILDER-HASH:-1801312313

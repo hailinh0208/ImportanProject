@@ -6,7 +6,7 @@
 package cms.notification.client.dto.v1_0;
 
 import cms.notification.client.function.UnsafeSupplier;
-import cms.notification.client.serdes.v1_0.CompetitionSerDes;
+import cms.notification.client.serdes.v1_0.DisplayPageSerDes;
 
 import jakarta.annotation.Generated;
 
@@ -19,21 +19,21 @@ import java.util.Objects;
  * @generated
  */
 @Generated("")
-public class Competition implements Cloneable, Serializable {
+public class DisplayPage implements Cloneable, Serializable {
 
-	public static Competition toDTO(String json) {
-		return CompetitionSerDes.toDTO(json);
+	public static DisplayPage toDTO(String json) {
+		return DisplayPageSerDes.toDTO(json);
 	}
 
-	public Long getKey() {
+	public Integer getKey() {
 		return key;
 	}
 
-	public void setKey(Long key) {
+	public void setKey(Integer key) {
 		this.key = key;
 	}
 
-	public void setKey(UnsafeSupplier<Long, Exception> keyUnsafeSupplier) {
+	public void setKey(UnsafeSupplier<Integer, Exception> keyUnsafeSupplier) {
 		try {
 			key = keyUnsafeSupplier.get();
 		}
@@ -42,7 +42,7 @@ public class Competition implements Cloneable, Serializable {
 		}
 	}
 
-	protected Long key;
+	protected Integer key;
 
 	public String getName() {
 		return name;
@@ -64,8 +64,8 @@ public class Competition implements Cloneable, Serializable {
 	protected String name;
 
 	@Override
-	public Competition clone() throws CloneNotSupportedException {
-		return (Competition)super.clone();
+	public DisplayPage clone() throws CloneNotSupportedException {
+		return (DisplayPage)super.clone();
 	}
 
 	@Override
@@ -74,13 +74,13 @@ public class Competition implements Cloneable, Serializable {
 			return true;
 		}
 
-		if (!(object instanceof Competition)) {
+		if (!(object instanceof DisplayPage)) {
 			return false;
 		}
 
-		Competition competition = (Competition)object;
+		DisplayPage displayPage = (DisplayPage)object;
 
-		return Objects.equals(toString(), competition.toString());
+		return Objects.equals(toString(), displayPage.toString());
 	}
 
 	@Override
@@ -91,8 +91,8 @@ public class Competition implements Cloneable, Serializable {
 	}
 
 	public String toString() {
-		return CompetitionSerDes.toJSON(this);
+		return DisplayPageSerDes.toJSON(this);
 	}
 
 }
-// LIFERAY-REST-BUILDER-HASH:-393428219
+// LIFERAY-REST-BUILDER-HASH:-1098104735

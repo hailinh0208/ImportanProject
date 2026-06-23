@@ -79,6 +79,72 @@ components:
                 messageBody:
                     type: string
             type: object
+        DisplayPage:
+            description: "Display page information"
+            properties:
+                key:
+                    format: int32
+                    type: integer
+                name:
+                    maxLength: 32
+                    type: string
+            type: object
+        Priority:
+            description: "Priority setting information"
+            properties:
+                id:
+                    format: int64
+                    type: integer
+                displayPages:
+                    items:
+                        $ref: "#/components/schemas/DisplayPage"
+                    type: array
+                priority:
+                    format: int32
+                    type: integer
+            type: object
+        ImportantNotification:
+            description: "Important notification item"
+            properties:
+                id:
+                    format: int64
+                    type: integer
+                noticeTitle:
+                    maxLength: 128
+                    type: string
+                noticeContent:
+                    maxLength: 255
+                    type: string
+                importantNoticeStart:
+                    description: "Format: YYYY-MM-DD HH:MM:SS"
+                    type: string
+                importantNoticeEnd:
+                    description: "Format: YYYY-MM-DD HH:MM:SS"
+                    type: string
+                displayBeforeOrAfterLogin:
+                    maxLength: 32
+                    type: string
+                displayPages:
+                    items:
+                        $ref: "#/components/schemas/DisplayPage"
+                    type: array
+                priorities:
+                    items:
+                        $ref: "#/components/schemas/Priority"
+                    type: array
+            type: object
+        ImportantNotificationResponse:
+            description: "Response wrapper for important notifications"
+            properties:
+                importantNotifications:
+                    items:
+                        $ref: "#/components/schemas/ImportantNotification"
+                    type: array
+                returnedCount:
+                    type: integer
+                messageInfo:
+                    $ref: "#/components/schemas/MessageInfo"
+            type: object
 paths:
     "/cms-regular-notification":
         get:
@@ -134,4 +200,61 @@ paths:
                             schema:
                                 $ref: "#/components/schemas/RegularNotificationResponse"
                     description: "Service Unavaiable"
+            tags: ["Notification"]
+    "/cms-important-notification":
+        get:
+            description: "Get important notifications by page code"
+            operationId: getImportantNotification
+            parameters:
+                - in: query
+                  name: pagecode
+                  schema:
+                      format: int32
+                      type: integer
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ImportantNotificationResponse"
+                        application/xml:
+                            schema:
+                                $ref: "#/components/schemas/ImportantNotificationResponse"
+                    description: "Success"
+                400:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                        application/xml:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                    description: "Bad Request - Missing pagecode"
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                        application/xml:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                    description: "Not Found - Invalid pagecode"
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                        application/xml:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                    description: "Internal Server Error"
+                503:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                        application/xml:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                    description: "Service Unavailable"
             tags: ["Notification"]

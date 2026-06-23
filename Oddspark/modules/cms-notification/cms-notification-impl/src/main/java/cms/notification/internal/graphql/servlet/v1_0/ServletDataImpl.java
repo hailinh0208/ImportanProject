@@ -70,4 +70,4 @@ public class ServletDataImpl implements ServletData {
 			};
 
 }
-// LIFERAY-REST-BUILDER-HASH:-828165249
+// LIFERAY-REST-BUILDER-HASH:71707981

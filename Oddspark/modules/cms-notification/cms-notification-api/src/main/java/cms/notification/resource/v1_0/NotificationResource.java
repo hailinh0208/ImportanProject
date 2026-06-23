@@ -5,6 +5,7 @@
 
 package cms.notification.resource.v1_0;
 
+import cms.notification.dto.v1_0.ImportantNotificationResponse;
 import cms.notification.dto.v1_0.RegularNotificationResponse;
 
 import com.liferay.portal.kernel.service.GroupLocalService;
@@ -41,6 +42,10 @@ import org.osgi.annotation.versioning.ProviderType;
 @Generated("")
 @ProviderType
 public interface NotificationResource {
+
+	public ImportantNotificationResponse getImportantNotification(
+			Integer pagecode)
+		throws Exception;
 
 	public RegularNotificationResponse getRegularNotification(
 			Integer competition, Integer limit)
@@ -134,4 +139,4 @@ public interface NotificationResource {
 	}
 
 }
-// LIFERAY-REST-BUILDER-HASH:-1893714242
+// LIFERAY-REST-BUILDER-HASH:21802329

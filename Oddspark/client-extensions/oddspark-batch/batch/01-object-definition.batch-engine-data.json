@@ -30,6 +30,7 @@
         "ja_JP": "お知らせ管理"
       },
       "name": "NoticeMaster",
+      "friendlyURLSeparator": "m_notice_master",
       "defaultLanguageId": "ja_JP",
       "portlet": true,
       "scope": "company",
