@@ -7,9 +7,9 @@ import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-public class NotificationNotFoundException extends WebApplicationException {
+public class ImportantNoticeBadRequestException extends WebApplicationException {
 
-	public NotificationNotFoundException(
+	public ImportantNoticeBadRequestException(
 		String messageId, String messageBody) {
 
 		super(_buildResponse(messageId, messageBody));
@@ -28,7 +28,7 @@ public class NotificationNotFoundException extends WebApplicationException {
 		errorResponse.setMessageInfo(messageInfo);
 
 		return Response.status(
-			Response.Status.NOT_FOUND
+			Response.Status.BAD_REQUEST
 		).entity(
 			errorResponse.toString()
 		).type(

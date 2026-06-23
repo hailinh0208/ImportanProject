@@ -132,7 +132,7 @@ public class ImportantNotification implements Serializable {
 	}
 
 	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	@JsonProperty(value = "displayPageMulti", access = JsonProperty.Access.READ_WRITE)
 	protected DisplayPage[] displayPages;
 
 	@JsonIgnore
@@ -440,7 +440,7 @@ public class ImportantNotification implements Serializable {
 				sb.append(", ");
 			}
 
-			sb.append("\"displayPages\": ");
+			sb.append("\"displayPageMulti\": ");
 
 			sb.append("[");
 

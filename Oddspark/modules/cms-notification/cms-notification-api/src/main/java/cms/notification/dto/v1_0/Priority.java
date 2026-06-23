@@ -84,7 +84,7 @@ public class Priority implements Serializable {
 	}
 
 	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	@JsonProperty(value = "displayPageSingle", access = JsonProperty.Access.READ_WRITE)
 	protected DisplayPage[] displayPages;
 
 	@JsonIgnore
@@ -204,7 +204,7 @@ public class Priority implements Serializable {
 				sb.append(", ");
 			}
 
-			sb.append("\"displayPages\": ");
+			sb.append("\"displayPageSingle\": ");
 
 			sb.append("[");
 

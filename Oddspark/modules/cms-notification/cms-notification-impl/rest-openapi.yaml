@@ -225,36 +225,36 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: "#/components/schemas/ErrorResponse"
+                                $ref: "#/components/schemas/MessageInfo"
                         application/xml:
                             schema:
-                                $ref: "#/components/schemas/ErrorResponse"
+                                $ref: "#/components/schemas/MessageInfo"
                     description: "Bad Request - Missing pagecode"
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: "#/components/schemas/ErrorResponse"
+                                $ref: "#/components/schemas/MessageInfo"
                         application/xml:
                             schema:
-                                $ref: "#/components/schemas/ErrorResponse"
+                                $ref: "#/components/schemas/MessageInfo"
                     description: "Not Found - Invalid pagecode"
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: "#/components/schemas/ErrorResponse"
+                                $ref: "#/components/schemas/MessageInfo"
                         application/xml:
                             schema:
-                                $ref: "#/components/schemas/ErrorResponse"
+                                $ref: "#/components/schemas/MessageInfo"
                     description: "Internal Server Error"
                 503:
                     content:
                         application/json:
                             schema:
-                                $ref: "#/components/schemas/ErrorResponse"
+                                $ref: "#/components/schemas/MessageInfo"
                         application/xml:
                             schema:
-                                $ref: "#/components/schemas/ErrorResponse"
+                                $ref: "#/components/schemas/MessageInfo"
                     description: "Service Unavailable"
-            tags: ["Notification"]
+            tags: [ "Notification" ]

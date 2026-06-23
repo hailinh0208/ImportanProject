@@ -8,6 +8,7 @@ package cms.notification.internal.resource.v1_0;
 import cms.notification.dto.v1_0.ImportantNotificationResponse;
 import cms.notification.dto.v1_0.RegularNotificationResponse;
 import cms.notification.internal.constants.NotificationConstants;
+import cms.notification.internal.exception.ImportantNoticeBadRequestException;
 import cms.notification.internal.exception.NotificationBadRequestException;
 import cms.notification.internal.service.ImportantNotificationService;
 import cms.notification.internal.service.NotificationService;
@@ -62,7 +63,7 @@ public class NotificationResourceImpl extends BaseNotificationResourceImpl {
 		throws Exception {
 
 		if (pagecode == null) {
-			throw new NotificationBadRequestException(
+			throw new ImportantNoticeBadRequestException(
 				NotificationConstants.ERROR_MISSING_PAGECODE,
 				"画面コードを入力してください。");
 		}
