@@ -5,7 +5,6 @@
 
 package cms.notification.internal.resource.v1_0;
 
-import cms.notification.dto.v1_0.ImportantNotificationResponse;
 import cms.notification.dto.v1_0.RegularNotificationResponse;
 import cms.notification.resource.v1_0.NotificationResource;
 
@@ -47,38 +46,6 @@ import java.util.Map;
 @jakarta.ws.rs.Path("/v1.0")
 public abstract class BaseNotificationResourceImpl
 	implements NotificationResource {
-
-	/**
-	 * Invoke this method with the command line:
-	 *
-	 * curl -X 'GET' 'http://localhost:8080/o/headless-api/v1.0/cms-important-notification'  -u 'test@liferay.com:test'
-	 */
-	@io.swagger.v3.oas.annotations.Operation(
-		description = "Get important notifications by page code"
-	)
-	@io.swagger.v3.oas.annotations.Parameters(
-		value = {
-			@io.swagger.v3.oas.annotations.Parameter(
-				in = io.swagger.v3.oas.annotations.enums.ParameterIn.QUERY,
-				name = "pagecode"
-			)
-		}
-	)
-	@io.swagger.v3.oas.annotations.tags.Tags(
-		value = {@io.swagger.v3.oas.annotations.tags.Tag(name = "Notification")}
-	)
-	@jakarta.ws.rs.GET
-	@jakarta.ws.rs.Path("/cms-important-notification")
-	@jakarta.ws.rs.Produces({"application/json", "application/xml"})
-	@Override
-	public ImportantNotificationResponse getImportantNotification(
-			@io.swagger.v3.oas.annotations.Parameter(hidden = true)
-			@jakarta.ws.rs.QueryParam("pagecode")
-			Integer pagecode)
-		throws Exception {
-
-		return new ImportantNotificationResponse();
-	}
 
 	/**
 	 * Invoke this method with the command line:
@@ -345,4 +312,4 @@ public abstract class BaseNotificationResourceImpl
 		LogFactoryUtil.getLog(BaseNotificationResourceImpl.class);
 
 }
-// LIFERAY-REST-BUILDER-HASH:1605268245
+// LIFERAY-REST-BUILDER-HASH:-152233160

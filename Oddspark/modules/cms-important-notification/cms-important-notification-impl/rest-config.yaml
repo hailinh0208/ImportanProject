@@ -1,0 +1,9 @@
+apiDir: "../cms-important-notification-api/src/main/java"
+apiPackagePath: "cms.important.notification"
+application:
+    baseURI: "/cms-important-notification"
+    className: "CmsImportantNotificationApplication"
+    name: "CmsImportantNotification"
+author: "ADMIN"
+clientDir: "../cms-important-notification-client/src/main/java"
+#testDir: "../cms-important-notification-test/src/testIntegration/java"

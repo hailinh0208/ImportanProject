@@ -2,6 +2,7 @@ dependencies {
 	api project(":modules:cms-notification:cms-notification-api")
 
 	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
+	compileOnly project(":modules:cms-important-notification:cms-important-notification-api")
 }
 
 group = "cms.notification"

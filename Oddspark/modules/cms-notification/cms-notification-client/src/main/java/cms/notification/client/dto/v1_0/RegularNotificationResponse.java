@@ -129,4 +129,4 @@ public class RegularNotificationResponse implements Cloneable, Serializable {
 	}
 
 }
-// LIFERAY-REST-BUILDER-HASH:1733332703
+// LIFERAY-REST-BUILDER-HASH:677248377

@@ -12,26 +12,17 @@ public final class NotificationConstants {
 
 	// External reference codes for Object Definitions
 	public static final String ERC_OBJECT_NOTICE_MASTER = "OP_OBJ_NOTICE_MASTER";
-	public static final String ERC_OBJECT_IMPORTANT_NOTICE_PRIORITY =
-		"OP_OBJ_IMPORTANT_NOTICE_PRIORITY";
 
 	// External reference codes for Picklists
 	public static final String ERC_LIST_COMPETITION_TYPE = "OP_LIST_COMPETITION_TYPE";
 	public static final String ERC_LIST_NOTICE_CATEGORIES = "OP_LIST_NOTICE_CATEGORIES";
-	public static final String ERC_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE =
-		"OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE";
 
 	// Validation boundaries for the competition parameter
 	public static final int MIN_COMPETITION = 1;
 	public static final int MAX_COMPETITION = 5;
 
-	// Validation boundaries for the pagecode parameter (AMGBIO507)
-	public static final int MIN_PAGECODE = 1;
-	public static final int MAX_PAGECODE = 28;
-
 	// Default number of results when no limit is specified
 	public static final int DEFAULT_LIMIT = 3;
-	public static final int IMPORTANT_NOTICE_LIMIT = 3;
 
 	// Threshold in milliseconds for marking a notice as "new" (6 hours)
 	public static final long SIX_HOURS_MS = 6L * 60 * 60 * 1000;
@@ -42,8 +33,6 @@ public final class NotificationConstants {
 	// Error codes returned in bad-request responses
 	public static final String ERROR_MISSING_COMPETITION = "MDBCME0001";
 	public static final String ERROR_INVALID_COMPETITION = "MDBCME0014";
-	public static final String ERROR_MISSING_PAGECODE = "MDBCME0001";
-	public static final String ERROR_INVALID_PAGECODE = "MDBCME0014";
 
 	// Error code for server-side failures (500 / 503)
 	public static final String ERROR_SERVER_ERROR = "MDBCME0012";

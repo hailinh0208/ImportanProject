@@ -95,4 +95,4 @@ public class Competition implements Cloneable, Serializable {
 	}
 
 }
-// LIFERAY-REST-BUILDER-HASH:-393428219
+// LIFERAY-REST-BUILDER-HASH:-1130279765

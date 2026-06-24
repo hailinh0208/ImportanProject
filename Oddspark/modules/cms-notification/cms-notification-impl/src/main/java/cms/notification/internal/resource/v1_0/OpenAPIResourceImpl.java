@@ -88,8 +88,10 @@ public class OpenAPIResourceImpl {
 			add(NotificationResourceImpl.class);
 
 			add(OpenAPIResourceImpl.class);
+
+			add(ImportantNotificationSpec.class);
 		}
 	};
 
 }
-// LIFERAY-REST-BUILDER-HASH:1050658302
+// LIFERAY-REST-BUILDER-HASH:658212712

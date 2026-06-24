@@ -100,4 +100,4 @@ public class ErrorResponse implements Cloneable, Serializable {
 	}
 
 }
-// LIFERAY-REST-BUILDER-HASH:2084913166
+// LIFERAY-REST-BUILDER-HASH:-307917784

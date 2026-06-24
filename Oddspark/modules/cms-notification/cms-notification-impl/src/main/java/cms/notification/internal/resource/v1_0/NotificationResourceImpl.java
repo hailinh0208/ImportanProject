@@ -5,12 +5,9 @@
 
 package cms.notification.internal.resource.v1_0;
 
-import cms.notification.dto.v1_0.ImportantNotificationResponse;
 import cms.notification.dto.v1_0.RegularNotificationResponse;
 import cms.notification.internal.constants.NotificationConstants;
-import cms.notification.internal.exception.ImportantNoticeBadRequestException;
 import cms.notification.internal.exception.NotificationBadRequestException;
-import cms.notification.internal.service.ImportantNotificationService;
 import cms.notification.internal.service.NotificationService;
 import cms.notification.resource.v1_0.NotificationResource;
 
@@ -56,26 +53,6 @@ public class NotificationResourceImpl extends BaseNotificationResourceImpl {
 			contextAcceptLanguage.getPreferredLocale(),
 			contextCompany.getTimeZone());
 	}
-
-	@Override
-	public ImportantNotificationResponse getImportantNotification(
-			Integer pagecode)
-		throws Exception {
-
-		if (pagecode == null) {
-			throw new ImportantNoticeBadRequestException(
-				NotificationConstants.ERROR_MISSING_PAGECODE,
-				"画面コードを入力してください。");
-		}
-
-		return _importantNotificationService.getImportantNotifications(
-			pagecode, contextCompany.getCompanyId(),
-			contextAcceptLanguage.getPreferredLocale(),
-			contextCompany.getTimeZone());
-	}
-
-	@Reference
-	private ImportantNotificationService _importantNotificationService;
 
 	@Reference
 	private NotificationService _notificationService;

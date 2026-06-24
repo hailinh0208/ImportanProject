@@ -1,0 +1,6 @@
+Bundle-Name: cms-important-notification-api
+Bundle-SymbolicName: cms.important.notification.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	cms.important.notification.dto.v1_0,\
+	cms.important.notification.resource.v1_0
