@@ -124,7 +124,9 @@ import_entry "OP_DATA_NOTICE_008" '{
   "categories": ["3"], "competitions": ["1", "2", "3", "4", "5"],
   "publishStatus": false, "importantNotice": true,
   "displayBeforeOrAfterLogin": "3", "currentVersion": "1", "liveVersion": "1",
-  "displayDate": "2026-06-25T00:00:00Z"
+  "displayDate": "2026-06-25T00:00:00Z",
+  "importantNoticeStart": "2026-06-01T00:00:00Z",
+  "displayPageMulti": ["1", "3", "10", "17", "24"]
 }'
 
 import_entry "OP_DATA_NOTICE_009" '{
@@ -154,7 +156,10 @@ import_entry "OP_DATA_NOTICE_011" '{
   "categories": ["1"], "competitions": ["1"],
   "publishStatus": true, "importantNotice": true,
   "displayBeforeOrAfterLogin": "1", "currentVersion": "1", "liveVersion": "1",
-  "displayDate": "2026-06-28T00:00:00Z"
+  "displayDate": "2026-06-28T00:00:00Z",
+  "importantNoticeStart": "2026-06-20T00:00:00Z",
+  "importantNoticeEnd": "2026-07-31T00:00:00Z",
+  "displayPageMulti": ["1", "3", "4", "5"]
 }'
 
 import_entry "OP_DATA_NOTICE_012" '{
@@ -174,7 +179,9 @@ import_entry "OP_DATA_NOTICE_013" '{
   "categories": ["1"], "competitions": ["3"],
   "publishStatus": true, "importantNotice": true,
   "displayBeforeOrAfterLogin": "3", "currentVersion": "1", "liveVersion": "1",
-  "displayDate": "2026-07-02T00:00:00Z"
+  "displayDate": "2026-07-02T00:00:00Z",
+  "importantNoticeStart": "2026-06-24T00:00:00Z",
+  "displayPageMulti": ["1", "3", "10", "17"]
 }'
 
 import_entry "OP_DATA_NOTICE_014" '{
@@ -214,7 +221,9 @@ import_entry "OP_DATA_NOTICE_017" '{
   "categories": ["3"], "competitions": ["1", "2", "3", "4", "5"],
   "publishStatus": true, "importantNotice": true,
   "displayBeforeOrAfterLogin": "2", "currentVersion": "2", "liveVersion": "2",
-  "displayDate": "2026-06-30T00:00:00Z"
+  "displayDate": "2026-06-30T00:00:00Z",
+  "importantNoticeStart": "2026-06-20T00:00:00Z",
+  "displayPageMulti": ["1", "2", "3", "10", "17", "24"]
 }'
 
 import_entry "OP_DATA_NOTICE_018" '{
@@ -264,7 +273,10 @@ import_entry "OP_DATA_NOTICE_022" '{
   "categories": ["3"], "competitions": ["1", "2", "3", "4", "5"],
   "publishStatus": true, "importantNotice": true,
   "displayBeforeOrAfterLogin": "3", "currentVersion": "1", "liveVersion": "1",
-  "displayDate": "2026-07-18T00:00:00Z"
+  "displayDate": "2026-07-18T00:00:00Z",
+  "importantNoticeStart": "2026-06-23T00:00:00Z",
+  "importantNoticeEnd": "2026-07-20T00:00:00Z",
+  "displayPageMulti": ["1", "2", "3", "4", "10", "11", "17", "18", "24", "25"]
 }'
 
 import_entry "OP_DATA_NOTICE_023" '{
