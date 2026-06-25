@@ -14,18 +14,14 @@ import com.liferay.list.type.service.ListTypeDefinitionLocalService;
 import com.liferay.list.type.service.ListTypeEntryLocalService;
 import com.liferay.object.model.ObjectDefinition;
 import com.liferay.object.model.ObjectEntry;
-import com.liferay.object.model.ObjectRelationship;
 import com.liferay.object.service.ObjectDefinitionLocalService;
 import com.liferay.object.service.ObjectEntryLocalService;
-import com.liferay.object.service.ObjectRelationshipLocalService;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -76,71 +72,97 @@ public class ImportantNotificationServiceImpl
 						.ERC_OBJECT_IMPORTANT_NOTICE_PRIORITY,
 					companyId);
 
-		if (noticeMasterDef == null) {
+		if ((noticeMasterDef == null) || (priorityDef == null)) {
 			return _emptyResponse();
 		}
 
-		// 3. Fetch and filter NoticeMaster entries
-		long nowMillis = System.currentTimeMillis();
-		Date now = new Date(nowMillis + timeZone.getOffset(nowMillis));
-
-		List<ObjectEntry> filteredNotices =
+		// 3. Fetch all priority entries and filter by displayPageSingle = pageKey
+		List<ObjectEntry> allPriorities =
 			_objectEntryLocalService.getObjectEntries(
-				0, noticeMasterDef.getObjectDefinitionId(), QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS
-			).stream(
-			).filter(
-				entry -> _isImportantNoticeMatch(entry, pageKey, now)
-			).collect(
-				Collectors.toList()
-			);
+				0, priorityDef.getObjectDefinitionId(), QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS);
 
-		if (filteredNotices.isEmpty()) {
-			return _emptyResponse();
-		}
-
-		// 4. Build priority map: noticeMasterId → list of priority entries
-		Map<Long, List<ObjectEntry>> priorityMap = Collections.emptyMap();
-
-		if (priorityDef != null) {
-			priorityMap = _buildPriorityMap(noticeMasterDef, priorityDef);
-		}
-
-		// 5. Sort by priority (ASC, nulls last), then by importantNoticeStart DESC
-		Map<Long, List<ObjectEntry>> finalPriorityMap = priorityMap;
-
-		List<ObjectEntry> sorted = filteredNotices.stream(
-		).sorted(
-			Comparator.comparing(
-				(ObjectEntry e) -> _getPriorityForPage(
-					e, pageKey, finalPriorityMap),
-				Comparator.nullsLast(Comparator.naturalOrder())
-			).thenComparing(
-				e -> _getImportantNoticeStart(e),
-				Comparator.nullsLast(Comparator.reverseOrder())
-			)
+		List<ObjectEntry> matchingPriorities = allPriorities.stream(
+		).filter(
+			p -> pageKey.equals(
+				_toStringValue(p.getValues().get("displayPageSingle")))
 		).collect(
 			Collectors.toList()
 		);
 
-		// 6. Deduplicate by notice ID (keep first = highest priority)
-		Map<Long, ObjectEntry> seen = new LinkedHashMap<>();
-
-		for (ObjectEntry entry : sorted) {
-			seen.putIfAbsent(entry.getObjectEntryId(), entry);
+		if (matchingPriorities.isEmpty()) {
+			return _emptyResponse();
 		}
 
-		// 7. Take top 3 and build response
-		List<Item> items = seen.values(
-		).stream(
+		// 4. Discover FK field name from actual priority entry values
+		String fkFieldName = _discoverNoticeMasterFkField(
+			matchingPriorities, noticeMasterDef.getName());
+
+		if (fkFieldName == null) {
+			return _emptyResponse();
+		}
+
+		// 5. Current date/time
+		long nowMillis = System.currentTimeMillis();
+		Date now = new Date(nowMillis + timeZone.getOffset(nowMillis));
+
+		// 6. For each priority entry, fetch notice_master and apply all filters:
+		//    - publishStatus = true
+		//    - importantNotice = true
+		//    - date range valid
+		//    - displayPageMulti contains pageKey (double validation)
+		//    Deduplicate by noticeMasterId (keep first = highest priority entry)
+		Map<Long, ObjectEntry[]> seen = new LinkedHashMap<>();
+
+		for (ObjectEntry priorityEntry : matchingPriorities) {
+			Serializable fkValue = priorityEntry.getValues().get(fkFieldName);
+
+			if (!(fkValue instanceof Number)) {
+				continue;
+			}
+
+			long noticeMasterId = ((Number)fkValue).longValue();
+
+			if (seen.containsKey(noticeMasterId)) {
+				continue;
+			}
+
+			ObjectEntry notice = _objectEntryLocalService.fetchObjectEntry(
+				noticeMasterId);
+
+			if ((notice == null) ||
+				!_isImportantNoticeMatch(notice, pageKey, now)) {
+
+				continue;
+			}
+
+			seen.put(noticeMasterId, new ObjectEntry[] {notice, priorityEntry});
+		}
+
+		if (seen.isEmpty()) {
+			return _emptyResponse();
+		}
+
+		// 7. Sort: priority ASC (0 = NULL = last), then importantNoticeStart DESC
+		List<ObjectEntry[]> sorted = new ArrayList<>(seen.values());
+
+		sorted.sort(
+			Comparator.comparing(
+				(ObjectEntry[] pair) -> _getEffectivePriority(pair[1]),
+				Comparator.nullsLast(Comparator.naturalOrder())
+			).thenComparing(
+				pair -> _getImportantNoticeStart(pair[0]),
+				Comparator.nullsLast(Comparator.reverseOrder())
+			)
+		);
+
+		// 8. Take top 3 and build response
+		List<Item> items = sorted.stream(
 		).limit(
 			ImportantNotificationConstants.IMPORTANT_NOTICE_LIMIT
 		).map(
-			entry -> ImportantNotificationBuilder.build(
-				entry, pageKey, pageEntry,
-				finalPriorityMap.getOrDefault(
-					entry.getObjectEntryId(), Collections.emptyList()),
-				locale)
+			pair -> ImportantNotificationBuilder.build(
+				pair[0], pageKey, pageEntry, pair[1], locale)
 		).collect(
 			Collectors.toList()
 		);
@@ -194,87 +216,35 @@ public class ImportantNotificationServiceImpl
 			values.get("displayPageMulti"), pageKey);
 	}
 
-	private Map<Long, List<ObjectEntry>> _buildPriorityMap(
-			ObjectDefinition noticeMasterDef, ObjectDefinition priorityDef)
-		throws Exception {
+	private String _discoverNoticeMasterFkField(
+		List<ObjectEntry> priorityEntries, String noticeMasterObjectName) {
 
-		String fkFieldName = _findFkFieldName(noticeMasterDef, priorityDef);
+		String lowerName = noticeMasterObjectName.toLowerCase();
 
-		if (fkFieldName == null) {
-			return Collections.emptyMap();
-		}
+		for (ObjectEntry entry : priorityEntries) {
+			for (String key : entry.getValues().keySet()) {
+				if (key.startsWith("r_") && key.endsWith("Id") &&
+					key.toLowerCase().contains(lowerName)) {
 
-		List<ObjectEntry> allPriorities =
-			_objectEntryLocalService.getObjectEntries(
-				0, priorityDef.getObjectDefinitionId(), QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS);
-
-		Map<Long, List<ObjectEntry>> map = new HashMap<>();
-
-		for (ObjectEntry priority : allPriorities) {
-			Serializable fkValue = priority.getValues().get(fkFieldName);
-
-			if (fkValue instanceof Number) {
-				long noticeMasterId = ((Number)fkValue).longValue();
-
-				map.computeIfAbsent(
-					noticeMasterId, k -> new ArrayList<>()
-				).add(
-					priority
-				);
-			}
-		}
-
-		return map;
-	}
-
-	private String _findFkFieldName(
-		ObjectDefinition noticeMasterDef, ObjectDefinition priorityDef) {
-
-		try {
-			List<ObjectRelationship> relationships =
-				_objectRelationshipLocalService.getObjectRelationships(
-					noticeMasterDef.getObjectDefinitionId());
-
-			for (ObjectRelationship rel : relationships) {
-				if (rel.getObjectDefinitionId2() ==
-						priorityDef.getObjectDefinitionId()) {
-
-					return "r_" + rel.getName() + "_c_" +
-						noticeMasterDef.getName() + "Id";
+					return key;
 				}
 			}
-		}
-		catch (Exception e) {
 		}
 
 		return null;
 	}
 
-	private Integer _getPriorityForPage(
-		ObjectEntry entry, String pageKey,
-		Map<Long, List<ObjectEntry>> priorityMap) {
+	private Integer _getEffectivePriority(ObjectEntry priorityEntry) {
+		Serializable val = priorityEntry.getValues().get("priority");
 
-		List<ObjectEntry> priorities = priorityMap.getOrDefault(
-			entry.getObjectEntryId(), Collections.emptyList());
+		if (val instanceof Number) {
+			int intVal = ((Number)val).intValue();
 
-		return priorities.stream(
-		).filter(
-			p -> pageKey.equals(
-				String.valueOf(p.getValues().get("displayPageSingle")))
-		).map(
-			p -> {
-				Serializable val = p.getValues().get("priority");
+			// 0 stored as NULL equivalent → sort last
+			return intVal > 0 ? intVal : null;
+		}
 
-				return (val instanceof Number)
-					? ((Number)val).intValue() : null;
-			}
-		).filter(
-			v -> v != null
-		).findFirst(
-		).orElse(
-			null
-		);
+		return null;
 	}
 
 	private Date _getImportantNoticeStart(ObjectEntry entry) {
@@ -285,6 +255,14 @@ public class ImportantNotificationServiceImpl
 		}
 
 		return null;
+	}
+
+	private String _toStringValue(Object value) {
+		if (value == null) {
+			return null;
+		}
+
+		return String.valueOf(value).trim();
 	}
 
 	private ImportantNotificationResponse _emptyResponse() {
@@ -309,8 +287,5 @@ public class ImportantNotificationServiceImpl
 
 	@Reference
 	private ObjectEntryLocalService _objectEntryLocalService;
-
-	@Reference
-	private ObjectRelationshipLocalService _objectRelationshipLocalService;
 
 }

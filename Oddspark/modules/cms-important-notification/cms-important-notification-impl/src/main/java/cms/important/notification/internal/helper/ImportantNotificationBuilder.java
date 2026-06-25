@@ -11,21 +11,20 @@ import com.liferay.object.model.ObjectEntry;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 public final class ImportantNotificationBuilder {
 
 	public static Item build(
-		ObjectEntry entry, String pageKey, ListTypeEntry pageEntry,
-		List<ObjectEntry> relatedPriorities, Locale locale) {
+		ObjectEntry noticeEntry, String pageKey, ListTypeEntry pageEntry,
+		ObjectEntry priorityEntry, Locale locale) {
 
-		Map<String, Serializable> values = entry.getValues();
+		Map<String, Serializable> values = noticeEntry.getValues();
 
 		Item item = new Item();
 
-		item.setId(entry.getObjectEntryId());
+		item.setId(noticeEntry.getObjectEntryId());
 		item.setNoticeTitle((String)values.get("noticeTitle"));
 		item.setNoticeContent((String)values.get("noticeContent"));
 		item.setImportantNoticeStart(
@@ -40,10 +39,9 @@ public final class ImportantNotificationBuilder {
 				String.valueOf(displayBeforeOrAfterLogin));
 		}
 
-		// setDisplayPages stores into the displayPageMulti field
 		item.setDisplayPages(_buildDisplayPage(pageKey, pageEntry, locale));
 		item.setPriorities(
-			_buildPriorities(relatedPriorities, pageKey, pageEntry, locale));
+			new Priority[] {_buildPriority(priorityEntry, pageKey, pageEntry, locale)});
 
 		return item;
 	}
@@ -65,21 +63,6 @@ public final class ImportantNotificationBuilder {
 		return new DisplayPage[] {page};
 	}
 
-	private static Priority[] _buildPriorities(
-		List<ObjectEntry> relatedPriorities, String pageKey,
-		ListTypeEntry pageEntry, Locale locale) {
-
-		return relatedPriorities.stream(
-		).filter(
-			p -> pageKey.equals(
-				String.valueOf(p.getValues().get("displayPageSingle")))
-		).map(
-			p -> _buildPriority(p, pageKey, pageEntry, locale)
-		).toArray(
-			Priority[]::new
-		);
-	}
-
 	private static Priority _buildPriority(
 		ObjectEntry priorityEntry, String pageKey, ListTypeEntry pageEntry,
 		Locale locale) {
@@ -93,10 +76,11 @@ public final class ImportantNotificationBuilder {
 		Serializable priorityValue = values.get("priority");
 
 		if (priorityValue instanceof Number) {
-			priority.setPriority(((Number)priorityValue).intValue());
+			int intVal = ((Number)priorityValue).intValue();
+
+			priority.setPriority(intVal > 0 ? intVal : null);
 		}
 
-		// setDisplayPages stores into the displayPageSingle field
 		priority.setDisplayPages(_buildDisplayPage(pageKey, pageEntry, locale));
 
 		return priority;

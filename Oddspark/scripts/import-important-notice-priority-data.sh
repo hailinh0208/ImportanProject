@@ -13,19 +13,20 @@
 #
 # Test scenario matrix (pagecode → expected top-3 results, sorted by priority 1→2→3→NULL):
 #
-#  pagecode=1  (Overall TOP)            → 013[p=1], 011[p=2], 017[p=3]  (022[NULL] excluded)
+#  pagecode=1  (Overall TOP)            → 013[p=1], 011[p=2], 017[p=3]  (022[p=0] 4th, excluded)
 #  pagecode=2  (App)                    → 022[p=1], 017[p=2]
-#  pagecode=3  (Horse Racing TOP)       → 011[p=1], 022[p=2], 017[p=3]  (013[NULL] excluded)
-#  pagecode=4  (Horse Racing Race List) → 022[p=1], 011[p=3]
-#  pagecode=5  (Horse Racing Race Info) → 011[NULL]
+#  pagecode=3  (Horse Racing TOP)       → 011[p=1], 022[p=2], 017[p=3]  (013[p=0] 4th, excluded)
+#  pagecode=4  (Horse Racing Race List) → 022[p=1], 011[p=0]
+#  pagecode=5  (Horse Racing Race Info) → 011[p=0]
 #  pagecode=10 (Keirin TOP)             → 022[p=1], 013[p=2], 017[p=3]
 #  pagecode=11 (Keirin Race List)       → 022[p=2]
 #  pagecode=17 (Auto Race TOP)          → 013[p=1], 017[p=2], 022[p=3]
-#  pagecode=18 (Auto Race Race List)    → 022[NULL]
+#  pagecode=18 (Auto Race Race List)    → 022[p=0]
 #  pagecode=24 (LOTO TOP)               → 017[p=1], 022[p=2]
 #  pagecode=25 (LOTO Race List)         → 022[p=3]
 #  pagecode=6..9,12..16,19..23,26..28   → [] (empty)
-#  pagecode=1 with notice 008           → 008 must NOT appear (publishStatus=false)
+#
+# Constraint: priority must be unique per displayPageSingle among published notices.
 
 HOST="${1:-http://localhost:8080}"
 CREDENTIALS="${2:-test@liferay.com:1}"
@@ -83,28 +84,6 @@ echo "Importing important notice priority seed data to $HOST..."
 echo ""
 
 # ---------------------------------------------------------------------------
-# Notice 008 — Scheduled Server Upgrade
-# importantNotice=true, publishStatus=false → must NOT appear in any API result
-# displayPageMulti: [1, 3, 10, 17, 24]
-# ---------------------------------------------------------------------------
-echo "=== Notice 008: Scheduled Server Upgrade (unpublished — verify excluded from results) ==="
-if ! check_notice_master "OP_DATA_NOTICE_008"; then
-  echo "  ERROR: OP_DATA_NOTICE_008 not found. Run import-notice-master-data.sh first."
-else
-  import_priority "OP_DATA_PRIORITY_008_P1"  "OP_DATA_NOTICE_008" \
-    '{"externalReferenceCode":"OP_DATA_PRIORITY_008_P1","displayPageSingle":"1","priority":1}'
-  import_priority "OP_DATA_PRIORITY_008_P3"  "OP_DATA_NOTICE_008" \
-    '{"externalReferenceCode":"OP_DATA_PRIORITY_008_P3","displayPageSingle":"3","priority":1}'
-  import_priority "OP_DATA_PRIORITY_008_P10" "OP_DATA_NOTICE_008" \
-    '{"externalReferenceCode":"OP_DATA_PRIORITY_008_P10","displayPageSingle":"10","priority":1}'
-  import_priority "OP_DATA_PRIORITY_008_P17" "OP_DATA_NOTICE_008" \
-    '{"externalReferenceCode":"OP_DATA_PRIORITY_008_P17","displayPageSingle":"17","priority":1}'
-  import_priority "OP_DATA_PRIORITY_008_P24" "OP_DATA_NOTICE_008" \
-    '{"externalReferenceCode":"OP_DATA_PRIORITY_008_P24","displayPageSingle":"24","priority":1}'
-fi
-echo ""
-
-# ---------------------------------------------------------------------------
 # Notice 011 — Horse Racing Result Correction
 # importantNotice=true, publishStatus=true
 # importantNoticeStart=2026-06-20, importantNoticeEnd=2026-07-31 (active)
@@ -113,8 +92,8 @@ echo ""
 # Priority assignments:
 #   page 1 (Overall TOP)            → priority=2
 #   page 3 (Horse Racing TOP)       → priority=1  (1st on this page)
-#   page 4 (Horse Racing Race List) → priority=3
-#   page 5 (Horse Racing Race Info) → NULL
+#   page 4 (Horse Racing Race List) → priority=0  (NULL, sorted last)
+#   page 5 (Horse Racing Race Info) → priority=0  (NULL, sorted last)
 # ---------------------------------------------------------------------------
 echo "=== Notice 011: Horse Racing Result Correction (published, active) ==="
 if ! check_notice_master "OP_DATA_NOTICE_011"; then
@@ -125,9 +104,9 @@ else
   import_priority "OP_DATA_PRIORITY_011_P3" "OP_DATA_NOTICE_011" \
     '{"externalReferenceCode":"OP_DATA_PRIORITY_011_P3","displayPageSingle":"3","priority":1}'
   import_priority "OP_DATA_PRIORITY_011_P4" "OP_DATA_NOTICE_011" \
-    '{"externalReferenceCode":"OP_DATA_PRIORITY_011_P4","displayPageSingle":"4","priority":3}'
+    '{"externalReferenceCode":"OP_DATA_PRIORITY_011_P4","displayPageSingle":"4","priority":0}'
   import_priority "OP_DATA_PRIORITY_011_P5" "OP_DATA_NOTICE_011" \
-    '{"externalReferenceCode":"OP_DATA_PRIORITY_011_P5","displayPageSingle":"5"}'
+    '{"externalReferenceCode":"OP_DATA_PRIORITY_011_P5","displayPageSingle":"5","priority":0}'
 fi
 echo ""
 
@@ -139,7 +118,7 @@ echo ""
 #
 # Priority assignments:
 #   page 1  (Overall TOP)      → priority=1  (1st on this page)
-#   page 3  (Horse Racing TOP) → NULL
+#   page 3  (Horse Racing TOP) → priority=0  (NULL, sorted last — 4th, excluded from top-3)
 #   page 10 (Keirin TOP)       → priority=2
 #   page 17 (Auto Race TOP)    → priority=1  (1st on this page)
 # ---------------------------------------------------------------------------
@@ -150,7 +129,7 @@ else
   import_priority "OP_DATA_PRIORITY_013_P1"  "OP_DATA_NOTICE_013" \
     '{"externalReferenceCode":"OP_DATA_PRIORITY_013_P1","displayPageSingle":"1","priority":1}'
   import_priority "OP_DATA_PRIORITY_013_P3"  "OP_DATA_NOTICE_013" \
-    '{"externalReferenceCode":"OP_DATA_PRIORITY_013_P3","displayPageSingle":"3"}'
+    '{"externalReferenceCode":"OP_DATA_PRIORITY_013_P3","displayPageSingle":"3","priority":0}'
   import_priority "OP_DATA_PRIORITY_013_P10" "OP_DATA_NOTICE_013" \
     '{"externalReferenceCode":"OP_DATA_PRIORITY_013_P10","displayPageSingle":"10","priority":2}'
   import_priority "OP_DATA_PRIORITY_013_P17" "OP_DATA_NOTICE_013" \
@@ -198,14 +177,14 @@ echo ""
 # displayPageMulti: [1, 2, 3, 4, 10, 11, 17, 18, 24, 25]
 #
 # Priority assignments:
-#   page 1  (Overall TOP)            → NULL     (4th, excluded from top-3)
+#   page 1  (Overall TOP)            → priority=0  (NULL, sorted last — 4th, excluded from top-3)
 #   page 2  (App)                    → priority=1
 #   page 3  (Horse Racing TOP)       → priority=2
 #   page 4  (Horse Racing Race List) → priority=1
 #   page 10 (Keirin TOP)             → priority=1
 #   page 11 (Keirin Race List)       → priority=2
 #   page 17 (Auto Race TOP)          → priority=3
-#   page 18 (Auto Race Race List)    → NULL
+#   page 18 (Auto Race Race List)    → priority=0  (NULL, sorted last)
 #   page 24 (LOTO TOP)               → priority=2
 #   page 25 (LOTO Race List)         → priority=3
 # ---------------------------------------------------------------------------
@@ -214,7 +193,7 @@ if ! check_notice_master "OP_DATA_NOTICE_022"; then
   echo "  ERROR: OP_DATA_NOTICE_022 not found. Run import-notice-master-data.sh first."
 else
   import_priority "OP_DATA_PRIORITY_022_P1"  "OP_DATA_NOTICE_022" \
-    '{"externalReferenceCode":"OP_DATA_PRIORITY_022_P1","displayPageSingle":"1"}'
+    '{"externalReferenceCode":"OP_DATA_PRIORITY_022_P1","displayPageSingle":"1","priority":0}'
   import_priority "OP_DATA_PRIORITY_022_P2"  "OP_DATA_NOTICE_022" \
     '{"externalReferenceCode":"OP_DATA_PRIORITY_022_P2","displayPageSingle":"2","priority":1}'
   import_priority "OP_DATA_PRIORITY_022_P3"  "OP_DATA_NOTICE_022" \
@@ -228,7 +207,7 @@ else
   import_priority "OP_DATA_PRIORITY_022_P17" "OP_DATA_NOTICE_022" \
     '{"externalReferenceCode":"OP_DATA_PRIORITY_022_P17","displayPageSingle":"17","priority":3}'
   import_priority "OP_DATA_PRIORITY_022_P18" "OP_DATA_NOTICE_022" \
-    '{"externalReferenceCode":"OP_DATA_PRIORITY_022_P18","displayPageSingle":"18"}'
+    '{"externalReferenceCode":"OP_DATA_PRIORITY_022_P18","displayPageSingle":"18","priority":0}'
   import_priority "OP_DATA_PRIORITY_022_P24" "OP_DATA_NOTICE_022" \
     '{"externalReferenceCode":"OP_DATA_PRIORITY_022_P24","displayPageSingle":"24","priority":2}'
   import_priority "OP_DATA_PRIORITY_022_P25" "OP_DATA_NOTICE_022" \
