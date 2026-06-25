@@ -58,13 +58,12 @@ public class ImportantNotificationServiceImpl
 		ListTypeEntry pageEntry = displayPageEntries.get(pagecode - 1);
 		String pageKey = pageEntry.getKey();
 
-		// 2. Get object definitions
-		ObjectDefinition noticeMasterDef =
-			_objectDefinitionLocalService
-				.fetchObjectDefinitionByExternalReferenceCode(
-					ImportantNotificationConstants.ERC_OBJECT_NOTICE_MASTER,
-					companyId);
+		List<ListTypeEntry> loginDisplayEntries = ListTypeHelper.loadEntries(
+			ImportantNotificationConstants.ERC_LIST_DISPLAY_BEFORE_AFTER_LOGIN,
+			companyId, _listTypeDefinitionLocalService,
+			_listTypeEntryLocalService);
 
+		// 2. Get priority object definition
 		ObjectDefinition priorityDef =
 			_objectDefinitionLocalService
 				.fetchObjectDefinitionByExternalReferenceCode(
@@ -72,7 +71,7 @@ public class ImportantNotificationServiceImpl
 						.ERC_OBJECT_IMPORTANT_NOTICE_PRIORITY,
 					companyId);
 
-		if ((noticeMasterDef == null) || (priorityDef == null)) {
+		if (priorityDef == null) {
 			return _emptyResponse();
 		}
 
@@ -94,19 +93,11 @@ public class ImportantNotificationServiceImpl
 			return _emptyResponse();
 		}
 
-		// 4. Discover FK field name from actual priority entry values
-		String fkFieldName = _discoverNoticeMasterFkField(
-			matchingPriorities, noticeMasterDef.getName());
-
-		if (fkFieldName == null) {
-			return _emptyResponse();
-		}
-
-		// 5. Current date/time
+		// 4. Current date/time
 		long nowMillis = System.currentTimeMillis();
 		Date now = new Date(nowMillis + timeZone.getOffset(nowMillis));
 
-		// 6. For each priority entry, fetch notice_master and apply all filters:
+		// 5. For each priority entry, fetch notice_master and apply all filters:
 		//    - publishStatus = true
 		//    - importantNotice = true
 		//    - date range valid
@@ -115,7 +106,8 @@ public class ImportantNotificationServiceImpl
 		Map<Long, ObjectEntry[]> seen = new LinkedHashMap<>();
 
 		for (ObjectEntry priorityEntry : matchingPriorities) {
-			Serializable fkValue = priorityEntry.getValues().get(fkFieldName);
+			Serializable fkValue = priorityEntry.getValues().get(
+				ImportantNotificationConstants.FK_NOTICE_MASTER_ID);
 
 			if (!(fkValue instanceof Number)) {
 				continue;
@@ -162,7 +154,8 @@ public class ImportantNotificationServiceImpl
 			ImportantNotificationConstants.IMPORTANT_NOTICE_LIMIT
 		).map(
 			pair -> ImportantNotificationBuilder.build(
-				pair[0], pageKey, pageEntry, pair[1], locale)
+				pair[0], pageKey, pageEntry, pair[1],
+				loginDisplayEntries, locale)
 		).collect(
 			Collectors.toList()
 		);
@@ -214,24 +207,6 @@ public class ImportantNotificationServiceImpl
 
 		return NotificationEntryFilter.containsKey(
 			values.get("displayPageMulti"), pageKey);
-	}
-
-	private String _discoverNoticeMasterFkField(
-		List<ObjectEntry> priorityEntries, String noticeMasterObjectName) {
-
-		String lowerName = noticeMasterObjectName.toLowerCase();
-
-		for (ObjectEntry entry : priorityEntries) {
-			for (String key : entry.getValues().keySet()) {
-				if (key.startsWith("r_") && key.endsWith("Id") &&
-					key.toLowerCase().contains(lowerName)) {
-
-					return key;
-				}
-			}
-		}
-
-		return null;
 	}
 
 	private Integer _getEffectivePriority(ObjectEntry priorityEntry) {

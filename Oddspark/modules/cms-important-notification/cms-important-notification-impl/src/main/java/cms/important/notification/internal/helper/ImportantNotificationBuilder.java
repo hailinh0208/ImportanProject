@@ -11,6 +11,7 @@ import com.liferay.object.model.ObjectEntry;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -18,7 +19,8 @@ public final class ImportantNotificationBuilder {
 
 	public static Item build(
 		ObjectEntry noticeEntry, String pageKey, ListTypeEntry pageEntry,
-		ObjectEntry priorityEntry, Locale locale) {
+		ObjectEntry priorityEntry, List<ListTypeEntry> loginDisplayEntries,
+		Locale locale) {
 
 		Map<String, Serializable> values = noticeEntry.getValues();
 
@@ -35,8 +37,19 @@ public final class ImportantNotificationBuilder {
 		Object displayBeforeOrAfterLogin = values.get("displayBeforeOrAfterLogin");
 
 		if (displayBeforeOrAfterLogin != null) {
-			item.setDisplayBeforeOrAfterLogin(
-				String.valueOf(displayBeforeOrAfterLogin));
+			String key = String.valueOf(displayBeforeOrAfterLogin);
+
+			String name = loginDisplayEntries.stream(
+			).filter(
+				e -> key.equals(e.getKey())
+			).map(
+				e -> e.getName(locale)
+			).findFirst(
+			).orElse(
+				key
+			);
+
+			item.setDisplayBeforeOrAfterLogin(name);
 		}
 
 		item.setDisplayPages(_buildDisplayPage(pageKey, pageEntry, locale));

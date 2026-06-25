@@ -9,6 +9,12 @@ public final class ImportantNotificationConstants {
 	public static final String ERC_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE =
 		"OP_LIST_IMPORTANT_NOTICE_DISPLAY_PAGE";
 
+	public static final String ERC_LIST_DISPLAY_BEFORE_AFTER_LOGIN =
+		"OP_LIST_DISPLAY_BEFORE_AFTER_LOGIN";
+
+	public static final String FK_NOTICE_MASTER_ID =
+		"r_importantNoticePriority_c_NoticeMasterId";
+
 	public static final int MIN_PAGECODE = 1;
 
 	public static final int IMPORTANT_NOTICE_LIMIT = 3;
