@@ -1,0 +1,44 @@
+{
+	"fieldSets": [
+		{
+			"label": "Cài đặt thông báo quan trọng",
+			"fields": [
+				{
+					"dataType": "string",
+					"defaultValue": "重要",
+					"label": "Label",
+					"name": "label",
+					"type": "text"
+				},
+				{
+					"dataType": "string",
+					"defaultValue": "#FFD447",
+					"label": "Màu Label",
+					"name": "labelColor",
+					"type": "colorPicker"
+				},
+				{
+					"dataType": "string",
+					"defaultValue": "#FFFFFF",
+					"label": "Màu Tiêu Đề",
+					"name": "titleColor",
+					"type": "colorPicker"
+				},
+				{
+					"dataType": "string",
+					"defaultValue": "#FFFFFF",
+					"label": "Màu Nội Dung",
+					"name": "contentColor",
+					"type": "colorPicker"
+				},
+				{
+					"dataType": "string",
+					"defaultValue": "#3A403E",
+					"label": "Màu Nền",
+					"name": "bgColor",
+					"type": "colorPicker"
+				}
+			]
+		}
+	]
+}
