@@ -1,0 +1,15 @@
+assemble:
+    - from: assets
+      into: static
+
+oddspark-important-notice:
+    cssURLs:
+        - style.css
+    friendlyURLMapping: oddspark-important-notice
+    htmlElementName: op-important-notice
+    instanceable: false
+    name: Oddspark Important Notice
+    portletCategoryName: category.client-extensions
+    type: customElement
+    urls:
+        - index.js

@@ -13,7 +13,7 @@ public final class ImportantNotificationConstants {
 		"OP_LIST_DISPLAY_BEFORE_AFTER_LOGIN";
 
 	public static final String FK_NOTICE_MASTER_ID =
-		"r_importantNoticePriority_c_NoticeMasterId";
+		"r_importantNoticePriority_c_noticeMasterId";
 
 	public static final int MIN_PAGECODE = 1;
 

@@ -50,17 +50,31 @@ import_priority() {
   local NOTICE_MASTER_ERC="$2"
   local DATA="$3"
 
+  # Link to notice master via ERC (relationship name is importantNoticePriority — singular)
+  PAYLOAD=$(echo "$DATA" | sed "s/}$/,\"r_importantNoticePriority_c_noticeMasterERC\":\"$NOTICE_MASTER_ERC\"}/")
+
   STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
     "$PRIORITY_URL/by-external-reference-code/$ERC" -u "$CREDENTIALS")
 
   if [ "$STATUS" = "200" ]; then
-    echo "  SKIP $ERC (already exists)"
-    SKIPPED=$((SKIPPED + 1))
+    # Record exists — PATCH to update the FK
+    HTTP_CODE=$(curl -s -o /tmp/_op_priority_resp.json -w "%{http_code}" \
+      -X PATCH "$PRIORITY_URL/by-external-reference-code/$ERC" \
+      -H "Content-Type: application/json" \
+      -u "$CREDENTIALS" \
+      -d "{\"r_importantNoticePriority_c_noticeMasterERC\":\"$NOTICE_MASTER_ERC\"}")
+    BODY=$(cat /tmp/_op_priority_resp.json)
+    if echo "$BODY" | grep -q '"externalReferenceCode"'; then
+      echo "  PATCH $ERC"
+      CREATED=$((CREATED + 1))
+    else
+      echo "  FAIL $ERC (patch)"
+      echo "       HTTP : $HTTP_CODE"
+      echo "       Body : $(echo "$BODY" | head -c 400)"
+      FAILED=$((FAILED + 1))
+    fi
     return
   fi
-
-  # Link to notice master via ERC
-  PAYLOAD=$(echo "$DATA" | sed "s/}$/,\"r_importantNoticePriorities_c_noticeMasterERC\":\"$NOTICE_MASTER_ERC\"}/")
 
   HTTP_CODE=$(curl -s -o /tmp/_op_priority_resp.json -w "%{http_code}" \
     -X POST "$PRIORITY_URL" \
